@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/todo.css" />
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/todo.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="form-group">
+      <h1>To-Do</h1>
+      <form role="form">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Your Task"
+          name="task"
+        />
+      </form>
+      <button type="button" id="button" class="btn btn btn-primary">Add</button>
+    </div>
+    <div id="myname"> </div>
+    <ul class="list-unstyled" id="todo"></ul>
+
+    <script>
+      $(document).ready(function () {
+        var itemsarray = [];
+        if (localStorage.getItem("itemsarray") != null) {
+          itemsarray = JSON.parse(localStorage.itemsarray);
+          itemsarray2 = JSON.parse(localStorage.itemsarray2);
+          for (var i = 0; i < itemsarray.length; i++) {
+            $("#todo").append(
+              "<ul>" +
+                itemsarray[i] +
+                " <a href='#' class='close' aria-hidden='false'>&times;</a></ul>"
+            );
+          }
+        }
+        $("button").click(function () {
+          $("#todo").append(
+            "<ul>" +
+              $("input[name=task]").val() +
+              " <a href='#' class='close' aria-hidden='false'>&times;</a></ul>"
+          );
+          itemsarray.push($("input[name=task]").val());
+          localStorage["itemsarray"] = JSON.stringify(itemsarray);
+          localStorage["itemsarray2"] = JSON.stringify(itemsarray2);
+        });
+
+        $("body").on("click", "#todo a",  function () {
+          $(this).closest("ul").remove();
+        });
+      });
+/////////////////////////////////////////////////////////////////
+function testJS(){
+var name = jQuery("#name").val();
+jQuery.load("next.html",function(){
+jQuery("#here").html(name);
+});
+}
+
+
+     
+
+    </script>
+  </body>
+</html>

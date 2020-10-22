@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/todo.css" />
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/todo.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="form-group">
+      <h1>Enter your name</h1>
+      <form role="form">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Your name"
+          name="task"
+        />
+      </form>
+      <button type="button" id="button" class="btn btn btn-primary">Register</button>
+    </div>
+    <div></div>
+    <ol class="list-unstyled" id="todo"></ol>
+
+    <script>
+      $(document).ready(function () {
+        var itemsarray2 = [];
+        if (localStorage.getItem("itemsarray2") != null) {
+          itemsarray2 = JSON.parse(localStorage.itemsarray2);
+          for (var i = 0; i < itemsarray2.length; i++) {
+            $("#todo").append(
+              "<ul>" +
+                itemsarray2[i] +
+                " <a href='#' class='close' aria-hidden='false'>&times;</a></ul>"
+            );
+          }
+        }
+        $("button").click(function () {
+          $("#todo").append(
+            "<ul>" +
+              $("input[name=task]").val() +
+              " <a href='#' class='close' aria-hidden='false'>&times;</a></ul>"
+          );
+          itemsarray2.push($("input[name=task]").val());
+          localStorage["itemsarray2"] = JSON.stringify(itemsarray2);
+        });
+
+        $("body").on("click", "#todo a", function () {
+          $(this).closest("ul").remove();
+        });
+      });
+
+      // const list =localStorage.setItem("list1",todo).value;
+      // function myfun(){
+
+      //   var todo = document.querySelector('#todo');}
+      //   function store() {
+      //     window.localStorage.myitems = todo.innerHTML;
+      //   }
+      //   myfun();
+      //   function getValues() {
+      //     var storedValues = window.localStorage.myitems;
+      //     if(!storedValues) {
+      //       list.innerHTML = '<li>Make a to do list</li>'+
+      //                        '<li>Check off first thing on the to do list</li>'+
+      //                        '<li>Realize you have already accomplished 2 things in the list</li>'+
+      //                        '<li>Reward yourself with a nap</li>';
+      //     }
+      //     else {
+      //       list.innerHTML = storedValues;
+      //     }
+      //   }
+      //   getValues();
+      //   var object = JSON.parse(localStorage.getItem("key")),
+      //   dateString = object.timestamp,
+      //   now = new Date().getTime().toString();
+
+      // compareTime(dateString, now); //to implement
+
+      // form.addEventListener('submit',function(e){
+      //   e.preventDefault();
+      //   list.innerHTML += '<li>' + item.value + '</li>';
+      //   store();
+      //   item.value = "";
+      // },false)
+
+      /*       let LIST,id ;
+let data =localStorage.getItem("todo");
+if (data){
+  LIST=JSON.parse(data);
+  id=LIST.length;
+  loadlist(LIST);
+}else{
+  LIST=[];
+  id=0;
+} */
+      /* function loadlist(array){
+  array.forEach(function(item){
+    addtodo(item.name,item.id,item)
+  }
+} */
+    </script>
+  </body>
+</html>
